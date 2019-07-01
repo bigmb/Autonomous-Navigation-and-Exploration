@@ -18,3 +18,9 @@ For returning home, this is the path taken.
 
 <img src="https://github.com/bigmb/Autonomous-Navigation-and-Exploration/blob/master/ex.png" width="450">
 
+
+# Outcome
+
+The robot was able to successfully explore the environment.
+
+
