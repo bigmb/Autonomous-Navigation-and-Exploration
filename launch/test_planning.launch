@@ -1,0 +1,6 @@
+<launch>
+	<!-- Offline planner ompl -->
+	<rosparam command="load" file="$(find autonomous_explore_map_plan)/launch/config/tests_blocks.yaml" />
+	<node pkg="autonomous_explore_map_plan" type="tutorial_offline_planner_R2" name="tutorial_offline_planner_R2" output="screen" />
+
+</launch>

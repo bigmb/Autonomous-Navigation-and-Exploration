@@ -1,0 +1,24 @@
+<launch>
+  <!-- Read launch arguments -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="theta" default="0"/>
+  <arg name="goals_file" default="None"/>
+  <arg name="sym" default="False"/>
+
+  <!-- If symulation include the turtlebot_gazebo turtlebto_empty_world.launch -->
+  <group if="$(arg sym)">
+    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch"/>
+  </group>
+
+  <!-- Set the arguments to parameters -->
+  <param name="x" value="$(arg x)"/>
+  <param name="y" value="$(arg y)"/>
+  <param name="theta" value="$(arg theta)"/>
+  <param name="goals_file" value="$(arg goals_file)"/>
+
+
+  <!-- Turtlebot Driver node -->
+  <node pkg="autonomous_explore_map_plan" type="node.py" name="driver" output="screen"/>
+
+</launch>

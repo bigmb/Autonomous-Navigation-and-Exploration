@@ -1,0 +1,10 @@
+planner_name : "RRTstar" # available planners (RRT, RRTstar, RRTConnect), (EST), (PRM, PRMstar)
+solving_time : 20.0 # available computation time to attempt to solve the query
+
+#Configuration Space (C-Space) boundaries
+planning_bounds_x : [-35, 35]
+planning_bounds_y : [-35, 35]
+
+# Range: Represents the maximum length of a motion to be added to the tree of motions. Posible values- From 0  to 10000 in 1 step
+range: 5.5
+

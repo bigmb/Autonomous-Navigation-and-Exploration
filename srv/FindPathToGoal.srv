@@ -1,0 +1,5 @@
+## Service 
+float32 goal_state_x
+float32 goal_state_y
+---
+geometry_msgs/Pose2D[] poses

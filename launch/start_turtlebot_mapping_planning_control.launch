@@ -1,0 +1,48 @@
+<launch>
+	<arg name="enable_octomap" value="true"/>
+	<arg name="enable_controller" value="true"/>
+	<arg name="enable_planner" value="true"/>
+	<arg name="enable_exploration" value="true"/>
+    <arg name="enable_return" value="true"/>
+    
+	<group if="$(arg enable_octomap)">
+    	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args=" " cwd="node" output="screen">
+    		<param name="frame_id"            	  value="/odom" />
+    		<remap from="/cloud_in" to="/pc_from_scan" /> <!-- simulator -->
+    		<param name="resolution"            	  value="0.05" />
+    		<param name="latch"            	  value="False" />
+    		<!--remap from="/cloud_in" to="/camera/depth_registered/points" /--> <!-- real turtlebot -->
+		</node>
+    </group>
+    
+    <node pkg="autonomous_explore_map_plan" type="laserscan_2_pointcloud" name="laserscan_to_pointcloud" respawn="true" output="screen" />
+    
+    <group if="$(arg enable_controller)"> 
+    	<node pkg="autonomous_explore_map_plan" type="turtlebot_drive.py" name="turtlebot_drive" respawn="true" output="screen" />
+    </group>
+    
+   
+	
+     <group if="$(arg enable_exploration)">
+    	<node pkg="autonomous_explore_map_plan" type="explore.py" name="explore_node" respawn="true" output="screen" />
+    	</group>
+
+     <group if="$(arg enable_return)">
+        <node pkg="autonomous_explore_map_plan" type="turtlebot_return.py" name="turtlebot_return" respawn="true" output="screen" />
+        </group>
+
+        <group if="$(arg enable_planner)">
+        <!-- Offline planner ompl -->
+        <rosparam command="load" file="$(find autonomous_explore_map_plan)/launch/config/planner_parameters.yaml" />
+        <node pkg="autonomous_explore_map_plan" type="offline_planner_R2" name="tutorial_offline_planner_R2" output="screen" />
+    </group>
+
+
+     <group if="$(arg enable_planner)">
+        <!-- Offline planner ompl -->
+        <rosparam command="load" file="$(find autonomous_explore_map_plan)/launch/config/planner_parameters.yaml" />
+        <node pkg="autonomous_explore_map_plan" type="offline_planner_R2_2" name="tutorial_offline_planner_R2_2" output="screen" />
+    </group>
+
+	 
+</launch>
