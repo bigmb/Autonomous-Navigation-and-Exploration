@@ -23,4 +23,7 @@ For returning home, this is the path taken.
 
 The robot was able to successfully explore the environment.
 
-
+# Blog 
+```
+Coming Up
+```
